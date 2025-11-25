@@ -785,22 +785,7 @@
             // Show skeleton loading immediately
             recommendedSkeleton.classList.remove('hidden');
 
-         // Scroll to top button event listener
-scrollToTop.addEventListener('click', function() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Show/hide scroll to top button based on scroll position
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 300) {
-        scrollToTop.classList.add('visible');
-    } else {
-        scrollToTop.classList.remove('visible');
-    }
-});
+         
             // Event Listeners
             searchInput.addEventListener('input', function() {
                 const value = searchInput.value.trim();
@@ -887,7 +872,23 @@ window.addEventListener('scroll', function() {
                     hideRecommendedModal();
                 }
             });
-            
+
+         // Scroll to top button event listener
+scrollToTop.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Show/hide scroll to top button based on scroll position
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+        scrollToTop.classList.add('visible');
+    } else {
+        scrollToTop.classList.remove('visible');
+    }
+});
             // Audio event listeners
             audioPlayer.addEventListener('play', function() {
                 isPlaying = true;
