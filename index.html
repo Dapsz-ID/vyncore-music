@@ -543,34 +543,7 @@
                 background-position: -200% 0;
             }
         }
-     .scroll-to-top {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    background-color: var(--spotify-green);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
-    z-index: 90;
-}
-
-.scroll-to-top.visible {
-    opacity: 0.8;
-    visibility: visible;
-}
-
-.scroll-to-top:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
+     
     </style>
 </head>
 <body class="min-h-screen">
@@ -767,7 +740,7 @@
             const recommendedModal = document.getElementById('recommendedModal');
             const closeModal = document.getElementById('closeModal');
             const modalTracks = document.getElementById('modalTracks');
-            const scrollToTop = document.getElementById('scrollToTop');
+             
             // State
             let currentTrackIndex = 0;
             let tracks = [];
@@ -873,22 +846,7 @@
                 }
             });
 
-         // Scroll to top button event listener
-scrollToTop.addEventListener('click', function() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Show/hide scroll to top button based on scroll position
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 300) {
-        scrollToTop.classList.add('visible');
-    } else {
-        scrollToTop.classList.remove('visible');
-    }
-});
+         
             // Audio event listeners
             audioPlayer.addEventListener('play', function() {
                 isPlaying = true;
@@ -1233,33 +1191,28 @@ window.addEventListener('scroll', function() {
             }
             
             async function searchTracks(query) {
-    showLoading();
-    searchSection.classList.remove('hidden');
-    mainEmptyState.classList.add('hidden');
-    
-    try {
-        const response = await fetch(`https://api.ootaizumi.web.id/downloader/spotifyplay?query=${encodeURIComponent(query)}`);
-        const data = await response.json();
-        
-        if (data.status && data.result) {
-            // Convert single result to array for consistency
-            tracks = [data.result];
-            displayTracks(tracks);
-            
-            // Auto-scroll to search results after a short delay
-            setTimeout(() => {
-                searchSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 300);
-        } else {
-            displayNoResults();
-        }
-    } catch (error) {
-        console.error('Error fetching tracks:', error);
-        displayError();
-    } finally {
-        hideLoading();
-    }
-}
+                showLoading();
+                searchSection.classList.remove('hidden');
+                mainEmptyState.classList.add('hidden');
+                
+                try {
+                    const response = await fetch(`https://api.ootaizumi.web.id/downloader/spotifyplay?query=${encodeURIComponent(query)}`);
+                    const data = await response.json();
+                    
+                    if (data.status && data.result) {
+                        // Convert single result to array for consistency
+                        tracks = [data.result];
+                        displayTracks(tracks);
+                    } else {
+                        displayNoResults();
+                    }
+                } catch (error) {
+                    console.error('Error fetching tracks:', error);
+                    displayError();
+                } finally {
+                    hideLoading();
+                }
+            }
             
             function displayTracks(tracks) {
                 searchResults.innerHTML = '';
