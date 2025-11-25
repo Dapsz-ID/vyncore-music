@@ -767,7 +767,7 @@
             const recommendedModal = document.getElementById('recommendedModal');
             const closeModal = document.getElementById('closeModal');
             const modalTracks = document.getElementById('modalTracks');
-            
+            const scrollToTop = document.getElementById('scrollToTop');
             // State
             let currentTrackIndex = 0;
             let tracks = [];
@@ -784,7 +784,23 @@
             
             // Show skeleton loading immediately
             recommendedSkeleton.classList.remove('hidden');
-            
+
+         // Scroll to top button event listener
+scrollToTop.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Show/hide scroll to top button based on scroll position
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+        scrollToTop.classList.add('visible');
+    } else {
+        scrollToTop.classList.remove('visible');
+    }
+});
             // Event Listeners
             searchInput.addEventListener('input', function() {
                 const value = searchInput.value.trim();
