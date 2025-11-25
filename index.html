@@ -543,6 +543,34 @@
                 background-position: -200% 0;
             }
         }
+     .scroll-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: var(--spotify-green);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+    z-index: 90;
+}
+
+.scroll-to-top.visible {
+    opacity: 0.8;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
     </style>
 </head>
 <body class="min-h-screen">
